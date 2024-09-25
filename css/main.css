@@ -1,0 +1,66 @@
+/* Basic styling */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  header {
+    text-align: center;
+    background-color: #333;
+    color: #fff;
+    padding: 1em 0;
+  }
+  
+  main {
+    display: flex;
+    justify-content: space-around;
+    padding: 2em;
+  }
+  
+  section {
+    flex: 1;
+    margin: 0 1em;
+  }
+  
+  .image-gallery, .meme-editor {
+    border: 1px solid #ccc;
+    padding: 1em;
+    border-radius: 8px;
+  }
+  
+  .image-gallery h2, .meme-editor h2 {
+    text-align: center;
+  }
+  
+  .gallery-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  
+  .meme-canvas {
+    display: block;
+    margin: 1em auto;
+    border: 1px solid #000;
+  }
+  
+  .editor-tools {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 1em;
+  }
+  
+  .download-btn {
+    background-color: #4CAF50;
+    color: white;
+    padding: 0.5em 1em;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .download-btn:hover {
+    background-color: #45a049;
+  }
+  
