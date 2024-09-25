@@ -7,21 +7,33 @@
   <link rel="stylesheet" href="css/main.css">
 </head>
 <body>
+  <!-- Navigation Bar -->
+  <nav class="navbar">
+    <div class="logo-container">
+      <img src="img/logo/LOGO.png" alt="Logo" class="logo"> <!-- Adjust the path to your logo -->
+    </div>
+    <ul class="nav-links">
+      <li><a href="#memes">Memes</a></li>
+      <li><a href="#gallery" class="nav-gallery">Gallery</a></li>
+      <li><a href="#about">About</a></li>
+    </ul>
+  </nav>
+
   <header>
     <h1>Super-Duper Meme Generator</h1>
   </header>
 
   <main>
     <!-- Image Gallery Section -->
-    <section class="image-gallery">
+    <section class="image-gallery" id="image-gallery">
       <h2>Image Gallery</h2>
       <div class="gallery-container">
-        
+        <!-- Images will be dynamically added here by JavaScript -->
       </div>
     </section>
 
     <!-- Meme Editor Section -->
-    <section class="meme-editor">
+    <section class="meme-editor" id="meme-editor" style="display: none;">
       <h2>Meme Editor</h2>
       <canvas class="meme-canvas"></canvas>
       <div class="editor-tools">
@@ -33,5 +45,7 @@
   </main>
 
   <script src="js/main.js"></script>
+  <script src="js/memeController.js"></script>
+  <script src="js/memeService.js"></script>
 </body>
 </html>

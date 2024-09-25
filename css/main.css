@@ -63,4 +63,35 @@ body {
   .download-btn:hover {
     background-color: #45a049;
   }
+
+
+  .navbar {
+    display: flex;
+    justify-content: space-between; /* Space between logo and links */
+    align-items: center; /* Center items vertically */
+    padding: 10px 20px; /* Padding around the nav */
+    background-color: #f0f0f0; /* Background color of the navbar */
+    border-bottom: 2px solid #ccc; /* Optional: border at the bottom */
+}
+
+.nav-links {
+    list-style: none; /* Remove bullet points */
+    display: flex; /* Flex layout for the links */
+    gap: 20px; /* Space between links */
+}
+
+.nav-links li a {
+    text-decoration: none; /* Remove underline */
+    color: #333; /* Link color */
+    font-weight: bold; /* Make links bold */
+}
+
+.logo-container {
+    /* Add any desired styling for the logo container */
+}
+
+.logo {
+    height: 40px; /* Adjust the logo height */
+    width: auto; /* Maintain aspect ratio */
+}
   
