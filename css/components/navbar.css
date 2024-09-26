@@ -1,0 +1,26 @@
+.navbar {
+    display: flex;
+    height: 69px;
+    justify-content: space-between; /* Space between logo and links */
+    align-items: center; 
+    padding: 10px 20px;
+    background-color: var(--clr-nav); 
+    border-bottom: 2px solid #ccc; 
+}
+
+.nav-links {
+    list-style: none; /* Remove bullet points */
+    display: flex; /* Flex layout for the links */
+    gap: 20px; /* Space between links */
+}
+
+.nav-links li a {
+    text-decoration: none; /* Remove underline */
+    color: var(--clr-text);
+    font-weight: bold; /* Make links bold */
+}
+
+/* Mobile button styles */
+.moblie-btn {
+    display: none; /* Hidden by default */
+}

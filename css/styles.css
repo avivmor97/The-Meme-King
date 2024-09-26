@@ -1,0 +1,22 @@
+/* main */
+@import url('main.css');
+@import url('layout.css');
+
+/* editor */
+@import url('editor/editorLayout.css');
+@import url('editor/tools.css');
+@import url('editor/modal.css');
+
+
+/* gallery */
+@import url('gallery/galleryLayout.css');
+@import url('gallery/about.css');
+
+/* components */
+@import url('components/navbar.css');
+@import url('components/logo.css');
+@import url('components/footer.css');
+
+/* setup */
+@import url('setup/mq.css');
+@import url('setup/vars.css');

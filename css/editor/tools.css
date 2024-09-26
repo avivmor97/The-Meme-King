@@ -1,0 +1,146 @@
+.meme-text {
+    grid-row-start: 1;
+    grid-row-end: 2;
+
+    grid-column-start: 1;
+    grid-column-end: 6;
+
+    border-radius: 20px;
+    border: var(--clr-btn);
+
+}
+
+.text-color-picker {
+    grid-row-start: 5;
+    grid-row-end: 6;
+
+    grid-column-start: 5;
+    grid-column-end: 6;
+
+    border-radius: 20px;
+    border: var(--clr-btn);
+}
+
+.download-btn {
+    background-color: var(--clr-share-btn);
+    color: var(--clr-text);
+    border: none;
+    cursor: pointer;
+}
+
+.facebook-btn {
+    background-color: var(--clr-share-btn);
+    color: var(--clr-text);
+    border: none;
+    cursor: pointer;
+
+}
+
+.switch-line-btn {
+    grid-row-start: 2;
+    grid-row-end: 3;
+
+    grid-column-start: 5;
+    grid-column-end: 6;
+
+
+}
+
+.add-line-btn {
+    grid-row-start: 2;
+    grid-row-end: 3;
+
+    grid-column-start: 3;
+    grid-column-end: 4;
+
+}
+
+.increase-font-btn {
+    grid-row-start: 4;
+    grid-row-end: 5;
+
+    grid-column-start: 1;
+    grid-column-end: 2;
+
+
+}
+
+.decrease-font-btn {
+    grid-row-start: 4;
+    grid-row-end: 5;
+
+    grid-column-start: 2;
+    grid-column-end: 3;
+
+}
+
+.share-btn {
+    grid-row-start: 9;
+    grid-row-end: 10;
+
+    grid-column-start: 5;
+    grid-column-end: 6;
+
+    background-color: var(--clr-share-btn);
+    color: var(--clr-text);
+}
+
+.align-left-btn {
+    grid-row-start: 4;
+    grid-row-end: 5;
+
+    grid-column-start: 3;
+    grid-column-end: 4;
+}
+
+.align-center-btn {
+    grid-row-start: 4;
+    grid-row-end: 5;
+
+    grid-column-start: 4;
+    grid-column-end: 5;
+}
+
+.align-right-btn {
+    grid-row-start: 4;
+    grid-row-end: 5;
+
+    grid-column-start: 5;
+    grid-column-end: 6;
+}
+
+.font-family-selector {
+    grid-row-start: 5;
+    grid-row-end: 6;
+
+    grid-column-start: 1;
+    grid-column-end: 4;
+
+    border-radius: 20px;
+    border: var(--clr-btn);
+}
+
+.delete-line-btn {
+    grid-row-start: 2;
+    grid-row-end: 3;
+
+    grid-column-start: 4;
+    grid-column-end: 5;
+}
+
+.move-up-btn{
+    grid-row-start: 2;
+    grid-row-end: 3;
+
+    grid-column-start: 1;
+    grid-column-end: 2;
+
+}
+.move-down-btn{
+    grid-row-start: 2;
+    grid-row-end: 3;
+
+    grid-column-start: 2;
+    grid-column-end: 3;
+
+}

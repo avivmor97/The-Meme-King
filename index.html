@@ -1,47 +1,113 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Meme Generator</title>
-  <link rel="stylesheet" href="css/main.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meme Generator</title>
+    <link rel="stylesheet" href="css/styles.css">
 </head>
+
 <body>
-  <!-- Navigation Bar -->
-  <nav class="navbar">
-    <div class="logo-container">
-      <img src="img/logo/LOGO.png" alt="Logo" class="logo"> <!-- Adjust the path to your logo -->
-    </div>
-    <ul class="nav-links">
-      <li><a href="#memes">Memes</a></li>
-      <li><a href="#gallery" class="nav-gallery">Gallery</a></li>
-      <li><a href="#about">About</a></li>
-    </ul>
-  </nav>
+    <main class="main-layout"> <!-- Navigation Bar -->
+        <nav class="navbar">
+            <div class="logo-container">
+                <img src="img/logo/LOGO.png" alt="Logo" class="logo">
+            </div>
+            <button class="moblie-btn">
+                <img class="icon" src="css/ICONS/manu2.png" alt="Menu">
+            </button>
+            <ul class="nav-links">
+                <li><a href="#memes">Memes</a></li>
+                <li><a href="#gallery" class="nav-gallery">Gallery</a></li>
+                <li><a href="#about">About</a></li>
+            </ul>
+        </nav>
 
-  <main>
-    <!-- Image Gallery Section -->
-    <section class="image-gallery" id="image-gallery">
-      <h2>Image Gallery</h2>
-      <div class="gallery-container">
-        <!-- Images will be dynamically added here by JavaScript -->
-      </div>
-    </section>
 
-    <!-- Meme Editor Section -->
-    <section class="meme-editor" id="meme-editor" style="display: none;">
-      <h2>Meme Editor</h2>
-      <canvas class="meme-canvas"></canvas>
-      <div class="editor-tools">
-        <input type="text" class="meme-text" placeholder="Enter your meme text here">
-        <input type="color" class="text-color-picker" value="#000000">
-        <button class="download-btn">Download Meme</button>
-      </div>
-    </section>
-  </main>
+        <!-- Image Gallery Section -->
+        <section class="image-gallery" id="image-gallery">
+            <div class="gallery-container">
+                <!-- Your gallery items can go here -->
+            </div>
 
-  <script src="js/main.js"></script>
-  <script src="js/memeController.js"></script>
-  <script src="js/memeService.js"></script>
+            <section class="about">
+                <div class="avatar-container">
+                    <img class="avatar" src="img/avatar/avatar.jpg" alt="">
+                </div>
+
+                <div class="about-text">
+                    <h2>Aviv Mor</h2>
+                    <p>Aviv Mor will be a great programmer someday!</p>
+                </div>
+            </section>
+        </section>
+
+
+
+        <!-- Meme Editor Section -->
+        <section class="meme-editor" id="meme-editor">
+            <div class="editor-container">
+                <canvas class="meme-canvas"></canvas>
+                <div class="editor-tools">
+                    <input type="text" class="meme-text" placeholder="Enter your meme text here">
+                    <input type="color" class="text-color-picker" value="#000000">
+                    <select class="font-family-selector">
+
+                        <option value="Arial">Arial</option>
+                        <option value="Comic Sans MS">Comic Sans</option>
+                        <option value="Courier New">Courier</option>
+                        <option value="Georgia">Georgia</option>
+                        <option value="Times New Roman">Times New Roman</option>
+                        <option value="Verdana">Verdana</option>
+                    </select>
+                    <button class="btn align-left-btn"><img class="icon" src="css/ICONS/align-to-left.png"
+                            alt=""></button>
+                    <button class="btn align-center-btn"><img class="icon" src="css/ICONS/center-text-alignment.png"
+                            alt=""></button>
+                    <button class="btn align-right-btn"><img class="icon" src="css/ICONS/align-to-right.png"
+                            alt=""></button>
+                    <button class="btn switch-line-btn"><img class="icon"
+                            src="css/ICONS/up-and-down-opposite-double-arrows-side-by-side.png" alt=""></button>
+                    <button class="btn add-line-btn"><img class="icon" src="css/ICONS/add.png" alt=""></button>
+                    <button class="btn delete-line-btn"><img class="icon" src="css/ICONS/trash.png" alt=""></button>
+                    <button class="btn increase-font-btn"><img class="icon" src="css/ICONS/increase font - icon.png"
+                            alt=""></button>
+                    <button class="btn decrease-font-btn"><img class="icon" src="css/ICONS/decrease font - icon.png"
+                            alt=""></button>
+                    <button class="btn move-up-btn"><img class="icon" src="css/ICONS/arrow-up.png"
+                            alt="Move Up"></button>
+                    <button class="btn move-down-btn"><img class="icon" src="css/ICONS/arrow-down.png"
+                            alt="Move Down"></button>
+                    <button class="btn share-btn" onclick="openShareModal()">Share</button>
+                </div>
+            </div>
+        </section>
+
+        <div id="shareModal" class="modal">
+            <!-- Modal content -->
+            <div class="modal-content">
+                <span class="close" onclick="closeShareModal()">&times;</span>
+                <button class="btn download-btn" onclick="downloadMeme()">Download</button>
+                <button class="btn facebook-btn" onclick="shareOnFacebook()">Share</button>
+            </div>
+        </div>
+
+        <footer>
+            <div class="logo-footer">
+                <img src="img/logo/LOGO.png" alt="Logo" class="logo"> <!-- Adjust the path to your logo -->
+            </div>
+            <p>all rights reserved 2019</p>
+        </footer>
+    </main>
+
+
+
+
+
+    <script src="js/galleryService.js"></script>
+    <script src="js/memeService.js"></script>
+    <script src="js/memeController.js"></script>
 </body>
+
 </html>

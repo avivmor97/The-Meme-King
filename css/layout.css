@@ -1,0 +1,5 @@
+.main-layout{
+    display: grid;
+    max-width: 1203px; 
+    min-width: 350px; 
+}

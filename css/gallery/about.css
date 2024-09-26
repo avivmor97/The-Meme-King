@@ -1,0 +1,36 @@
+.about {
+    background-color: var(--clr-text);
+    height: 530px;
+    display: grid; 
+    grid-template-columns: 1fr 2fr 3fr; 
+    align-items: center; 
+    margin-bottom: 40px;
+}
+
+.avatar-container {
+    border-radius: 50%;
+    grid-column-start: 2;
+    grid-column-end: 3;
+    width: 250px; /* Set the width of the avatar container */
+    height: 250px; /* Set the height of the avatar container */
+    overflow: hidden; /* Hide any overflow */
+    
+    
+    
+    
+    display: flex; 
+    justify-items: end; 
+    align-items: center; 
+}
+
+img.avatar {
+    width: 100%; 
+    height: auto; 
+    
+}
+.about-text {
+    grid-column-start: 3;
+    grid-column-end: 4;
+    text-align: center;
+    padding-left: 20px; /* Space between avatar and text */
+}

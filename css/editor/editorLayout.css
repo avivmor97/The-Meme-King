@@ -1,0 +1,30 @@
+.meme-editor {
+
+    border: 1px solid #ccc;
+    padding: 1em;
+    border-radius: 8px;
+    background-color: var(--clr-container);
+}
+
+.editor-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+
+    gap: 30px;
+
+    
+
+}
+
+
+.editor-tools {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    grid-template-rows: 2fr 2fr 1fr 2fr 2fr 1fr 3fr 1fr 2fr;
+    justify-content: space-around;
+    margin-top: 1em;
+    gap: 10px;
+}
+
+
+
