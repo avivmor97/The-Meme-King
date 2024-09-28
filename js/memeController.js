@@ -227,6 +227,8 @@ function onMouseUp() {
 
 // Touch events for mobile support
 function onTouchStart(event) {
+    event.preventDefault()
+    event.stopPropagation()
     const touch = event.touches[0]
     const rect = memeCanvas.getBoundingClientRect()
     const offsetX = touch.clientX - rect.left
@@ -243,6 +245,8 @@ function onTouchStart(event) {
 }
 
 function onTouchMove(event) {
+    event.preventDefault()
+    event.stopPropagation()
     if (!isDragging) return
     const touch = event.touches[0]
     const rect = memeCanvas.getBoundingClientRect()
@@ -255,7 +259,7 @@ function onTouchMove(event) {
     moveSelectedLine(dx, dy)
     startX = offsetX
     startY = offsetY
-    renderMeme()  // Update the canvas with the new position
+    renderMeme()  
 }
 
 function onTouchEnd() {
@@ -293,5 +297,4 @@ memeCanvas.addEventListener('click', (event) => {
         renderMeme() 
     }
 })
-
 

@@ -46,7 +46,7 @@ function updateTextInput() {
 function switchLine() {
     gMeme.selectedLineIdx = (gMeme.selectedLineIdx + 1) % gMeme.lines.length
     updateTextInput()
-    renderMeme() // Re-render the meme after switching lines
+    renderMeme() 
 }
 
 
@@ -169,6 +169,7 @@ function moveSelectedLine(dx, dy) {
     const selectedLine = getSelectedLine()
     selectedLine.posX += dx
     selectedLine.posY += dy
+    renderMeme()
 }
 
 // Get the currently selected line
@@ -178,13 +179,15 @@ function getSelectedLine() {
 
 // Function to check if a line was clicked
 function getClickedLineIdx(x, y) {
+    console.log(gMeme.selectedLineIdx)
+
     return gMeme.lines.findIndex(line => {
         const textWidth = ctx.measureText(line.txt).width
-        const textHeight = line.size // This can be adjusted for more accuracy
+        const textHeight = line.size 
 
         return (
-            x >= line.posX - textWidth / 2 && x <= line.posX + textWidth / 2 &&
-            y >= line.posY - textHeight && y <= line.posY // Adjust if you want to allow clicks slightly below
+            x >= line.posX - textWidth / 2 && x <= line.posX + textWidth / 2 && 
+            y >= line.posY - textHeight && y <= line.posY 
         )
     })
 }
