@@ -145,26 +145,6 @@ function moveLineDown() {
 }
 
 
-function getClickedLineIdx(x, y) {
-    const meme = getMeme();
-    for (let i = 0; i < meme.lines.length; i++) {
-        const line = meme.lines[i];
-        ctx.font = `${line.size}px ${line.fontFamily || 'Impact'}`;
-        const textWidth = ctx.measureText(line.txt).width;
-        
-        const startX = line.posX - textWidth / 2;
-        const endX = line.posX + textWidth / 2;
-        const startY = line.posY - line.size / 2;
-        const endY = line.posY + line.size / 2;
-
-        if (x >= startX && x <= endX && y >= startY && y <= endY) {
-            return i; // Return the index of the clicked line
-        }
-    }
-    return -1; // No line was clicked
-}
-
-
 
 function shareOnFacebook() {
     // Convert the canvas to a data URL
@@ -182,4 +162,30 @@ function shareOnFacebook() {
 }
 
 
+// //////////////////////////////////////////////////////////////////////////////
+
+
+function moveSelectedLine(dx, dy) {
+    const selectedLine = getSelectedLine()
+    selectedLine.posX += dx
+    selectedLine.posY += dy
+}
+
+// Get the currently selected line
+function getSelectedLine() {
+    return gMeme.lines[gMeme.selectedLineIdx]
+}
+
+// Function to check if a line was clicked
+function getClickedLineIdx(x, y) {
+    return gMeme.lines.findIndex(line => {
+        const textWidth = ctx.measureText(line.txt).width
+        const textHeight = line.size // This can be adjusted for more accuracy
+
+        return (
+            x >= line.posX - textWidth / 2 && x <= line.posX + textWidth / 2 &&
+            y >= line.posY - textHeight && y <= line.posY // Adjust if you want to allow clicks slightly below
+        )
+    })
+}
 

@@ -32,31 +32,30 @@ function renderMeme() {
     img.src = meme.selectedImg
 
     img.onload = () => {
-        // Set the canvas width to 100% and adjust height to maintain aspect ratio
+        
         memeCanvas.width = img.width
         memeCanvas.height = img.height
         
-        // Calculate aspect ratio
         const aspectRatio = img.width / img.height
         const newCanvasWidth = memeCanvas.width
         const newCanvasHeight = newCanvasWidth / aspectRatio
 
-        // Resize the canvas to the new dimensions
         memeCanvas.width = newCanvasWidth
         memeCanvas.height = newCanvasHeight
 
-        // Draw the image to fill the canvas
         ctx.drawImage(img, 0, 0, newCanvasWidth, newCanvasHeight)
 
+        // Render each line of text
         meme.lines.forEach((line, idx) => {
-            // Apply font family, size, and alignment
-            ctx.font = `${line.size}px ${line.fontFamily || 'Impact'}` // Use Impact as default
+            ctx.font = `${line.size}px ${line.fontFamily || 'Impact'}` 
             ctx.fillStyle = line.color
-            ctx.strokeStyle = line.strokeColor // Set stroke color
+            ctx.strokeStyle = line.strokeColor 
             ctx.textAlign = line.align || 'center'
 
-            // Set the line position based on the alignment
-            let xPos = memeCanvas.width / 2
+            let xPos = line.posX || memeCanvas.width / 2 
+            let yPos = line.posY || line.size 
+
+            // Adjust the position based on alignment
             if (line.align === 'left') xPos = 20
             if (line.align === 'right') xPos = memeCanvas.width - 20
 
@@ -65,24 +64,28 @@ function renderMeme() {
                 const textWidth = ctx.measureText(line.txt).width
                 const padding = 10
                 const rectX = xPos - (textWidth / 2) - padding
-                const rectY = line.posY - line.size
+                const rectY = yPos - line.size
                 const rectWidth = textWidth + padding * 2
                 const rectHeight = line.size + padding
 
                 // Draw semi-transparent rectangle
                 ctx.fillStyle = 'rgba(200, 200, 200, 0.8)' // Adjust color and opacity
                 ctx.fillRect(rectX, rectY, rectWidth, rectHeight)
+
+                // Set text color for the selected line
+                ctx.fillStyle = line.color // Set the selected line color
+            } else {
+                ctx.fillStyle = line.color // Default color for other lines
             }
 
-            // Draw the text stroke first
-            ctx.lineWidth = 2 // Set stroke width
-            ctx.strokeText(line.txt, xPos, line.posY)
-
-            // Draw the filled text on top
-            ctx.fillText(line.txt, xPos, line.posY)
+            ctx.lineWidth = 2 
+            ctx.strokeText(line.txt, xPos, yPos)
+            ctx.fillText(line.txt, xPos, yPos)
         })
     }
 }
+
+
 
 
 
@@ -109,25 +112,25 @@ colorPicker.addEventListener('input', (event) => {
 // Update font family
 fontFamilySelector.addEventListener('change', (event) => {
     setFontFamily(event.target.value);
-    renderMeme();
+    renderMeme()
 });
 
 // Text Alignment: Left
 alignLeftBtn.addEventListener('click', () => {
-    setTextAlign('left');
-    renderMeme();
+    setTextAlign('left')
+    renderMeme()
 });
 
 // Text Alignment: Center
 alignCenterBtn.addEventListener('click', () => {
-    setTextAlign('center');
-    renderMeme();
+    setTextAlign('center')
+    renderMeme()
 });
 
 // Text Alignment: Right
 alignRightBtn.addEventListener('click', () => {
-    setTextAlign('right');
-    renderMeme();
+    setTextAlign('right')
+    renderMeme()
 });
 
 // Update meme service functions to handle font family and alignment
@@ -169,13 +172,126 @@ mobileBtn.addEventListener('click', () => {
     navLinks2.classList.toggle('active') // Toggles the active class for visibility
 })
 
-memeCanvas.addEventListener('click', (event) => {
-    const { offsetX, offsetY } = event;
-    const clickedLineIdx = getClickedLineIdx(offsetX, offsetY);
+
+
+// //////////////////////////////////////////////////////////////
+
+
+
+
+let isDragging = false
+let startX = 0
+let startY = 0
+
+// Mouse events
+memeCanvas.addEventListener('mousedown', onMouseDown)
+memeCanvas.addEventListener('mousemove', onMouseMove)
+memeCanvas.addEventListener('mouseup', onMouseUp)
+
+// Touch events
+memeCanvas.addEventListener('touchstart', onTouchStart)
+memeCanvas.addEventListener('touchmove', onTouchMove)
+memeCanvas.addEventListener('touchend', onTouchEnd)
+
+// Handle mouse down event to start dragging
+function onMouseDown(event) {
+    const { offsetX, offsetY } = event
+    const clickedLineIdx = getClickedLineIdx(offsetX, offsetY)
+    
     if (clickedLineIdx !== -1) {
-        gMeme.selectedLineIdx = clickedLineIdx;
-        updateTextInput(); 
-        renderMeme(); 
+        gMeme.selectedLineIdx = clickedLineIdx
+        isDragging = true
+        startX = offsetX
+        startY = offsetY
     }
-});
+}
+
+// Handle mouse move event for dragging
+function onMouseMove(event) {
+    if (!isDragging) return
+
+    const { offsetX, offsetY } = event
+    const dx = offsetX - startX
+    const dy = offsetY - startY
+
+    moveSelectedLine(dx, dy)
+    startX = offsetX
+    startY = offsetY
+    renderMeme()  // Update the canvas with the new position
+}
+
+// Handle mouse up event to stop dragging
+function onMouseUp() {
+    isDragging = false
+}
+
+// Touch events for mobile support
+function onTouchStart(event) {
+    const touch = event.touches[0]
+    const rect = memeCanvas.getBoundingClientRect()
+    const offsetX = touch.clientX - rect.left
+    const offsetY = touch.clientY - rect.top
+
+    const clickedLineIdx = getClickedLineIdx(offsetX, offsetY)
+    
+    if (clickedLineIdx !== -1) {
+        gMeme.selectedLineIdx = clickedLineIdx
+        isDragging = true
+        startX = offsetX
+        startY = offsetY
+    }
+}
+
+function onTouchMove(event) {
+    if (!isDragging) return
+    const touch = event.touches[0]
+    const rect = memeCanvas.getBoundingClientRect()
+    const offsetX = touch.clientX - rect.left
+    const offsetY = touch.clientY - rect.top
+
+    const dx = offsetX - startX
+    const dy = offsetY - startY
+
+    moveSelectedLine(dx, dy)
+    startX = offsetX
+    startY = offsetY
+    renderMeme()  // Update the canvas with the new position
+}
+
+function onTouchEnd() {
+    isDragging = false
+}
+
+
+
+// Function to handle canvas click event and select the clicked line
+function onCanvasClick(event) {
+    const rect = memeCanvas.getBoundingClientRect()
+    const x = event.clientX - rect.left
+    const y = event.clientY - rect.top 
+
+    
+    const clickedLineIdx = getClickedLineIdx(x, y)
+
+   
+    if (clickedLineIdx !== -1) {
+        gMeme.selectedLineIdx = clickedLineIdx
+        updateTextInput()
+        renderMeme()
+    }
+}
+
+memeCanvas.addEventListener('click', (event) => {
+    const rect = memeCanvas.getBoundingClientRect()
+    const x = event.clientX - rect.left
+    const y = event.clientY - rect.top
+
+    const clickedLineIdx = getClickedLineIdx(x, y)
+    if (clickedLineIdx !== -1) {
+        gMeme.selectedLineIdx = clickedLineIdx 
+        updateTextInput() 
+        renderMeme() 
+    }
+})
+
 
