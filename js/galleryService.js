@@ -30,13 +30,15 @@ function loadGallery() {
 
         elImage.addEventListener('click', () => {
             selectImage(imgSrc) 
-            hideGallery()
-            memeEditor.style.display = 'block'
+            hideGallery() 
+            memeEditor.style.display = 'block' 
+            document.querySelector('.saved-memes-section').style.display = 'none' // Hide saved memes section when editor is open
         })
 
         galleryContainer.appendChild(elImage)
     })
 }
+
 
 
 function hideGallery() {
@@ -47,7 +49,9 @@ function hideGallery() {
 function showGallery() {
     gallerySection.style.display = 'block' 
     memeEditor.style.display = 'none' 
+    document.querySelector('.saved-memes-section').style.display = 'none' // Hide saved memes section when showing gallery
 }
+
 
 // Function to handle navigation link clicks
 function handleNavClick(event) {
@@ -56,11 +60,14 @@ function handleNavClick(event) {
     if (target.textContent === 'Gallery') {
         showGallery() 
     } else if (target.textContent === 'Memes') {
-        // Not ready yet
+        hideGallery() 
+        memeEditor.style.display = 'none' 
+        document.querySelector('.saved-memes-section').style.display = 'block' // Show the saved memes section
     } else if (target.textContent === 'About') {
         // Not ready yet
     }
 }
+
 
 // Add event listener to the nav links
 const navLinks = document.querySelectorAll('.nav-links a');

@@ -1,4 +1,4 @@
-'use strict';
+'use strict'
 //const list:
 const memeCanvas = document.querySelector('.meme-canvas')
 const ctx = memeCanvas.getContext('2d')
@@ -18,6 +18,8 @@ const moveUpBtn = document.querySelector('.move-up-btn')
 const moveDownBtn = document.querySelector('.move-down-btn')
 const mobileBtn = document.querySelector('.moblie-btn')
 const navLinks2 = document.querySelector('.nav-links')
+
+
 
 
 // Function to render the meme
@@ -168,11 +170,12 @@ mobileBtn.addEventListener('click', () => {
 })
 
 memeCanvas.addEventListener('click', (event) => {
-    const { offsetX, offsetY } = event
-    const clickedLineIdx = getClickedLineIdx(offsetX, offsetY)
+    const { offsetX, offsetY } = event;
+    const clickedLineIdx = getClickedLineIdx(offsetX, offsetY);
     if (clickedLineIdx !== -1) {
-        gMeme.selectedLineIdx = clickedLineIdx
-        updateTextInput() 
-        renderMeme() 
+        gMeme.selectedLineIdx = clickedLineIdx;
+        updateTextInput(); 
+        renderMeme(); 
     }
-})
+});
+

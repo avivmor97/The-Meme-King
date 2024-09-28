@@ -1,29 +1,30 @@
 'use strict';
 
 let gMeme = {
-    selectedImg: null,
+    selectedImg: null, 
     selectedLineIdx: 0,
     lines: [
         {
             txt: 'Enter first line',
             size: 40,
             color: 'white',
-            strokeColor: 'black', // Default stroke color
+            strokeColor: 'black', 
             posX: 250, 
             posY: 50,
-            fontFamily: 'Impact' // Set default font to Impact
+            fontFamily: 'Impact' 
         },
         {
             txt: 'Enter second line',
             size: 40,
             color: 'white',
-            strokeColor: 'black', // Default stroke color
+            strokeColor: 'black', 
             posX: 250,
             posY: 450,
-            fontFamily: 'Impact' // Set default font to Impact
+            fontFamily: 'Impact' 
         }
     ]
 }
+
 
 // Function to return the current meme object
 function getMeme() {
@@ -145,25 +146,40 @@ function moveLineDown() {
 
 
 function getClickedLineIdx(x, y) {
-    const meme = getMeme()
-
+    const meme = getMeme();
     for (let i = 0; i < meme.lines.length; i++) {
-        const line = meme.lines[i]
+        const line = meme.lines[i];
+        ctx.font = `${line.size}px ${line.fontFamily || 'Impact'}`;
+        const textWidth = ctx.measureText(line.txt).width;
+        
+        const startX = line.posX - textWidth / 2;
+        const endX = line.posX + textWidth / 2;
+        const startY = line.posY - line.size / 2;
+        const endY = line.posY + line.size / 2;
 
-        ctx.font = `${line.size}px Arial`
-        const textWidth = ctx.measureText(line.txt).width
-
-       
-        const startX = line.posX - textWidth / 2
-        const endX = line.posX + textWidth / 2
-        const startY = line.posY - line.size / 2
-        const endY = line.posY + line.size / 2
-
-      
         if (x >= startX && x <= endX && y >= startY && y <= endY) {
-            return i 
+            return i; // Return the index of the clicked line
         }
     }
-
-    return -1 
+    return -1; // No line was clicked
 }
+
+
+
+function shareOnFacebook() {
+    // Convert the canvas to a data URL
+    const memeDataUrl = memeCanvas.toDataURL('image/png');
+
+    // Create a temporary image element
+    const img = new Image();
+    img.src = memeDataUrl;
+
+    img.onload = function() {
+        // Open the Facebook share dialog
+        const fbShareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(memeDataUrl)}`;
+        window.open(fbShareUrl, '_blank');
+    };
+}
+
+
+

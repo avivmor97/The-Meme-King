@@ -28,3 +28,14 @@
 
 
 
+    .meme-canvas {
+        display: flex;
+        margin: 1em auto;
+        border: 1px solid #000;
+        font-family: 'Impact', sans-serif;
+        width: 100%; /* Set width to 100% for responsiveness */
+        max-width: 450px; /* Limit the maximum width */
+        min-width: 300px;
+        height: auto; 
+        
+    }

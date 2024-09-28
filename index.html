@@ -18,7 +18,7 @@
                 <img class="icon" src="css/ICONS/manu2.png" alt="Menu">
             </button>
             <ul class="nav-links">
-                <li><a href="#memes">Memes</a></li>
+                <li><a href="#saved-memes" class="nav-link" data-section="saved-memes">Memes</a></li>
                 <li><a href="#gallery" class="nav-gallery">Gallery</a></li>
                 <li><a href="#about">About</a></li>
             </ul>
@@ -41,6 +41,11 @@
                     <p>Aviv Mor will be a great programmer someday!</p>
                 </div>
             </section>
+        </section>
+
+
+        <section class="saved-memes-section" id="saved-memes">
+           
         </section>
 
 
@@ -90,6 +95,7 @@
                 <span class="close" onclick="closeShareModal()">&times;</span>
                 <button class="btn download-btn" onclick="downloadMeme()">Download</button>
                 <button class="btn facebook-btn" onclick="shareOnFacebook()">Share</button>
+                <button class="btn save-meme-btn">Save Meme</button>
             </div>
         </div>
 
@@ -104,9 +110,10 @@
 
 
 
-
+    <script src="js/storageService.js"></script>
     <script src="js/galleryService.js"></script>
     <script src="js/memeService.js"></script>
+    <script src="js/savedMemesController.js"></script>
     <script src="js/memeController.js"></script>
 </body>
 

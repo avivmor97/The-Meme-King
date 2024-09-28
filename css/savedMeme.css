@@ -1,0 +1,12 @@
+.saved-memes-section {
+
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 5px;
+    margin-bottom: 25px;
+    border: 1px solid #ccc;
+    
+    background-color: var(--clr-container);
+    display: none;
+}
+

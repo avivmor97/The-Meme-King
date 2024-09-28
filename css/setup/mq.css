@@ -102,30 +102,40 @@
         width: 30px;
         height: 30px;
         border: var(--clr-share-btn);
-        
+
         background-color: var(--clr-share-btn);
     }
+
     .nav-links {
-        display: none; 
-        flex-direction: column; 
-        position: absolute; 
-        top: 69px; 
-        right: 20px; 
-        background-color: var(--clr-nav); 
-        padding: 10px; 
-        border: 1px solid #ccc; 
-        z-index: 1000; 
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 69px;
+        right: 20px;
+        background-color: var(--clr-nav);
+        padding: 10px;
+        border: 1px solid #ccc;
+        z-index: 1000;
     }
 
     .nav-links.active {
-        display: flex; 
+        display: flex;
     }
 
     .moblie-btn {
-        display: block; 
+        display: block;
     }
 
-    
+    /*////////////////////////////////////////////////////////////////////  */
+    .saved-memes-section {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 5px;
+        margin-bottom: 25px;
+    }
+
+
+
 }
 
 
