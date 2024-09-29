@@ -172,3 +172,30 @@
     grid-column-end: 3;
 
 }
+
+.sticker-roster{
+    display: flex;
+    
+    gap: 10px;
+    grid-row-start: 7;
+    grid-row-end: 8;
+
+    width: 100%;
+
+    grid-column-start: 2;
+    grid-column-end: 5;
+
+}
+#current-sticker{
+    width: 50%;
+}
+
+.prev-arrow, .next-arrow {
+    cursor: pointer;
+    height: 30px;
+    width: 40px;
+    background-color: var(--clr-share-btn);
+    border: var(--clr-share-btn);
+    border-radius: 40px;
+    color: var(--clr-btn);
+}

@@ -1,9 +1,6 @@
 'use strict'
 
-
-
-
-const savedMemesSection = document.querySelector('.saved-memes-section') // Replace with the actual section class/ID
+const savedMemesSection = document.querySelector('.saved-memes-section') 
 
 // Initially hide the saved memes section
 savedMemesSection.style.display = 'none'
@@ -21,34 +18,44 @@ function saveMeme(meme) {
     saveToStorage('savedMemes', memes)
 }
 
-
-
 function renderSavedMemes() {
-    const memes = loadFromStorage('savedMemes')
+    const memes = loadFromStorage('savedMemes');
 
     if (!memes || memes.length === 0) {
-        savedMemesSection.innerHTML = '<p>No saved memes yet!</p>'
-        return
+        savedMemesContainer.innerHTML = '<p>No saved memes yet!</p>';
+        return;
     }
 
-    savedMemesSection.innerHTML = ''
+    savedMemesContainer.innerHTML = '';
 
     memes.forEach(meme => {
-        const memeHTML = `
-                <img src="${meme.imgUrl}" alt="Saved Meme">
-        `
-        savedMemesSection.innerHTML += memeHTML
-    })
+        const elImageContainer = document.createElement('div');
+        elImageContainer.classList.add('meme-container');
+
+        const elImage = document.createElement('img');
+        elImage.src = meme.imgUrl; // Use imgUrl from meme object
+        elImage.alt = 'Saved Meme Image';
+
+        elImage.addEventListener('click', () => {
+            selectImage(meme.imgUrl); // Load the selected saved meme
+            hideGallery();
+            memeEditor.style.display = 'block'; 
+            savedMemesSection.style.display = 'none'; // Hide saved memes section when editor is open
+        });
+
+        elImageContainer.appendChild(elImage);
+        savedMemesContainer.appendChild(elImageContainer);
+    });
 }
 
 // Function to get the canvas image
 function getCanvasImage() {
-    const canvas = document.querySelector('.meme-canvas') // Select canvas by class name
+    const canvas = document.querySelector('.meme-canvas')
     if (!canvas) {
         console.error('Canvas not found! Please check the canvas class.')
-        return null // Return null if the canvas is not found
+        return null
     }
-    return canvas.toDataURL('image/png') // This gets the image data URL from the canvas
+    return canvas.toDataURL('image/png')
 }
 
 // Event listener for saving memes when the button is clicked
@@ -109,19 +116,47 @@ function showSection(section) {
     })
 
     // Show the selected section
-    const sectionElement = document.getElementById(section)
+    const sectionElement = document.querySelector('.saved-memes-section')
     sectionElement.style.display = 'block'
 
     // If the saved memes section is selected, render the saved memes
     if (section === 'saved-memes') {
         renderSavedMemes()
-        showSavedMemes() // Call the function to show the saved memes section
+        showSavedMemes()
     } else {
-        hideSavedMemes() // Hide it when switching sections
+        hideSavedMemes()
     }
 }
 
 function selectImage(imgSrc) {
-    gMeme.selectedImg = imgSrc // Set the selected image URL
-    // Additional logic for displaying the meme editor
+    gMeme.selectedImg = imgSrc
+}
+
+
+
+function loadSavedMemes(savedMemes) {
+    savedMemesContainer.innerHTML = '' // Clear existing content
+
+    savedMemes.forEach(meme => {
+        const elImageContainer = document.createElement('div')
+        elImageContainer.classList.add('meme-container') // Add a class for styling
+
+        const elImage = document.createElement('img')
+        elImage.src = meme // Assuming meme is the image source
+        elImage.alt = 'Saved Meme Image'
+        elImage.classList.add('gallery-img')
+
+        elImage.style.width = '100%' // Use full width of the container
+        elImage.style.height = 'auto'
+
+        elImage.addEventListener('click', () => {
+            selectImage(meme) // Load the selected saved meme
+            hideGallery() 
+            memeEditor.style.display = 'block' 
+            document.querySelector('.saved-memes-section').style.display = 'none' // Hide saved memes section when editor is open
+        })
+
+        elImageContainer.appendChild(elImage)
+        savedMemesContainer.appendChild(elImageContainer)
+    })
 }

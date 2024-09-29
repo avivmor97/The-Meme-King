@@ -135,6 +135,22 @@
     }
 
 
+    .share-btn {
+        display: flex;
+        grid-row-start: 9;
+        grid-row-end: 10;
+
+        justify-content: center;
+        align-items: center;
+    
+        grid-column-start: 5;
+        grid-column-end: 6;
+    
+        background-color: var(--clr-share-btn);
+        color: var(--clr-text);
+    }
+
+
 
 }
 

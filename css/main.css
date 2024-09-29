@@ -6,22 +6,26 @@
   box-sizing: border-box;
 }
 
-
-
 h2 {
   text-align: center;
 }
 
-
-
-
 .btn{
-  width: 64px;
+  max-width: 64px;
+  min-width: 48px;
   height: 62px;
   border-radius: 10px;
   background-color: var(--clr-btn);
   border: var(--clr-btn);
+  transition: transform 0.2s, opacity 0.4s;
 }
+.btn :hover{
+ cursor: pointer;
+ transform: scale(1.05); 
+}
+
+
+
 
 img.icon{
   width: 70%;

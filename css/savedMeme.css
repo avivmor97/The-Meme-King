@@ -1,12 +1,26 @@
 .saved-memes-section {
-
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    gap: 5px;
+    display: none; 
     margin-bottom: 25px;
     border: 1px solid #ccc;
-    
     background-color: var(--clr-container);
-    display: none;
+    padding: 20px; 
 }
+
+.saved-memes-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); 
+    gap: 10px; 
+    width: 100%;
+}
+
+.saved-memes-container img {
+    width: 95%; 
+    height: auto;
+    transition: transform 0.2s, opacity 0.4s; /* Smooth transition for transform and opacity */
+}
+
+.saved-memes-container img:hover {
+    transform: scale(1.05); 
+}
+
 

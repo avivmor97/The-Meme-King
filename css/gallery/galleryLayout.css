@@ -16,3 +16,14 @@
     gap: 10px;
     margin-bottom: 50px;
   }
+
+
+  .gallery-container > img {
+    transition: 400ms;
+}
+
+
+.gallery-container:has(img:hover) > img:not(:hover) {
+    scale: .9;
+    opacity: .6;
+}

@@ -32,28 +32,20 @@ function renderMeme() {
     img.src = meme.selectedImg
 
     img.onload = () => {
-        
         memeCanvas.width = img.width
         memeCanvas.height = img.height
-        
-        const aspectRatio = img.width / img.height
-        const newCanvasWidth = memeCanvas.width
-        const newCanvasHeight = newCanvasWidth / aspectRatio
 
-        memeCanvas.width = newCanvasWidth
-        memeCanvas.height = newCanvasHeight
-
-        ctx.drawImage(img, 0, 0, newCanvasWidth, newCanvasHeight)
+        ctx.drawImage(img, 0, 0, memeCanvas.width, memeCanvas.height)
 
         // Render each line of text
         meme.lines.forEach((line, idx) => {
-            ctx.font = `${line.size}px ${line.fontFamily || 'Impact'}` 
+            ctx.font = `${line.size}px ${line.fontFamily || 'Impact'}`
             ctx.fillStyle = line.color
-            ctx.strokeStyle = line.strokeColor 
+            ctx.strokeStyle = line.strokeColor
             ctx.textAlign = line.align || 'center'
 
-            let xPos = line.posX || memeCanvas.width / 2 
-            let yPos = line.posY || line.size 
+            let xPos = line.posX || memeCanvas.width / 2
+            let yPos = line.posY || line.size
 
             // Adjust the position based on alignment
             if (line.align === 'left') xPos = 20
@@ -68,22 +60,24 @@ function renderMeme() {
                 const rectWidth = textWidth + padding * 2
                 const rectHeight = line.size + padding
 
-                // Draw semi-transparent rectangle
-                ctx.fillStyle = 'rgba(200, 200, 200, 0.8)' // Adjust color and opacity
+                ctx.fillStyle = 'rgba(200, 200, 200, 0.8)'
                 ctx.fillRect(rectX, rectY, rectWidth, rectHeight)
-
-                // Set text color for the selected line
-                ctx.fillStyle = line.color // Set the selected line color
+                ctx.fillStyle = line.color
             } else {
-                ctx.fillStyle = line.color // Default color for other lines
+                ctx.fillStyle = line.color
             }
 
-            ctx.lineWidth = 2 
+            ctx.lineWidth = 2
             ctx.strokeText(line.txt, xPos, yPos)
             ctx.fillText(line.txt, xPos, yPos)
         })
+
+        // Render stickers
+        addSticker()
+
     }
 }
+
 
 
 
@@ -197,7 +191,7 @@ memeCanvas.addEventListener('touchend', onTouchEnd)
 function onMouseDown(event) {
     const { offsetX, offsetY } = event
     const clickedLineIdx = getClickedLineIdx(offsetX, offsetY)
-    
+
     if (clickedLineIdx !== -1) {
         gMeme.selectedLineIdx = clickedLineIdx
         isDragging = true
@@ -235,7 +229,7 @@ function onTouchStart(event) {
     const offsetY = touch.clientY - rect.top
 
     const clickedLineIdx = getClickedLineIdx(offsetX, offsetY)
-    
+
     if (clickedLineIdx !== -1) {
         gMeme.selectedLineIdx = clickedLineIdx
         isDragging = true
@@ -259,7 +253,7 @@ function onTouchMove(event) {
     moveSelectedLine(dx, dy)
     startX = offsetX
     startY = offsetY
-    renderMeme()  
+    renderMeme()
 }
 
 function onTouchEnd() {
@@ -272,12 +266,12 @@ function onTouchEnd() {
 function onCanvasClick(event) {
     const rect = memeCanvas.getBoundingClientRect()
     const x = event.clientX - rect.left
-    const y = event.clientY - rect.top 
+    const y = event.clientY - rect.top
 
-    
+
     const clickedLineIdx = getClickedLineIdx(x, y)
 
-   
+
     if (clickedLineIdx !== -1) {
         gMeme.selectedLineIdx = clickedLineIdx
         updateTextInput()
@@ -290,11 +284,83 @@ memeCanvas.addEventListener('click', (event) => {
     const x = event.clientX - rect.left
     const y = event.clientY - rect.top
 
+    console.log(`Clicked coordinates: (${x}, ${y})`)
+
     const clickedLineIdx = getClickedLineIdx(x, y)
+    console.log(`Clicked line index: ${clickedLineIdx}`)
+
     if (clickedLineIdx !== -1) {
-        gMeme.selectedLineIdx = clickedLineIdx 
-        updateTextInput() 
-        renderMeme() 
+        gMeme.selectedLineIdx = clickedLineIdx
+        updateTextInput()
+        renderMeme()
     }
 })
+
+
+// /////////////////////////////////////////////////////////////////////////////////
+
+
+// Sticker Roster //
+
+
+const stickersOnCanvas = []
+
+const stickers = [
+    'img/stickers/CookieMonster.png',
+    'img/stickers/Panda-Sticker.png',
+    'img/stickers/smilly.png',
+    'img/stickers/Unicorn-ProductImage.png',
+]
+
+let currentStickerIndex = 0
+
+const currentStickerImg = document.getElementById('current-sticker')
+const prevArrow = document.querySelector('.prev-arrow')
+const nextArrow = document.querySelector('.next-arrow')
+
+
+function updateSticker() {
+    currentStickerImg.src = stickers[currentStickerIndex]
+}
+
+prevArrow.addEventListener('click', () => {
+    currentStickerIndex = (currentStickerIndex > 0) ? currentStickerIndex - 1 : stickers.length - 1
+    updateSticker()
+
+})
+
+nextArrow.addEventListener('click', () => {
+    currentStickerIndex = (currentStickerIndex < stickers.length - 1) ? currentStickerIndex + 1 : 0
+    updateSticker()
+
+})
+
+currentStickerImg.addEventListener('dragstart', (event) => {
+    event.dataTransfer.setData('text/plain', event.target.src)
+})
+
+memeCanvas.addEventListener('dragover', (event) => {
+    event.preventDefault()
+})
+
+memeCanvas.addEventListener('drop', (event) => {
+    event.preventDefault()
+    const imgSrc = event.dataTransfer.getData('text/plain')
+    const x = event.offsetX
+    const y = event.offsetY
+    addSticker(imgSrc, x, y)
+
+})
+
+function addSticker(imgSrc, x, y) {
+    const sticker = new Image()
+    sticker.src = imgSrc
+    sticker.onload = () => {
+        ctx.drawImage(sticker, x, y, 100, 100)
+    }
+
+}
+updateSticker()
+
+
 

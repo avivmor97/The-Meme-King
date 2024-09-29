@@ -44,9 +44,11 @@
         </section>
 
 
-        <section class="saved-memes-section" id="saved-memes">
-           
+        <section class="saved-memes-section">
+            <div class="saved-memes-container"></div> 
+            <!-- This is the new container for saved memes -->
         </section>
+        
 
 
 
@@ -84,6 +86,11 @@
                             alt="Move Up"></button>
                     <button class="btn move-down-btn"><img class="icon" src="css/ICONS/arrow-down.png"
                             alt="Move Down"></button>
+                            <section class="sticker-roster">
+                                <button class="prev-arrow">←</button>
+                                <img id="current-sticker"  draggable="true">
+                                <button class="next-arrow">→</button>
+                            </section>
                     <button class="btn share-btn" onclick="openShareModal()">Share</button>
                 </div>
             </div>
